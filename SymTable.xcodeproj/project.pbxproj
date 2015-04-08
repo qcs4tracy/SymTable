@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F11A83E01AD592D1005814D9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F11A83DF1AD592D1005814D9 /* main.c */; };
+		F11A83E81AD594BF005814D9 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = F11A83E61AD594BF005814D9 /* hashtable.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		F11A83DC1AD592D1005814D9 /* SymTable */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SymTable; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11A83DF1AD592D1005814D9 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		F11A83E61AD594BF005814D9 /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
+		F11A83E71AD594BF005814D9 /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashtable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				F11A83DF1AD592D1005814D9 /* main.c */,
+				F11A83E61AD594BF005814D9 /* hashtable.c */,
+				F11A83E71AD594BF005814D9 /* hashtable.h */,
 			);
 			path = SymTable;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F11A83E81AD594BF005814D9 /* hashtable.c in Sources */,
 				F11A83E01AD592D1005814D9 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +238,7 @@
 				F11A83E51AD592D1005814D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
