@@ -65,14 +65,13 @@
     }
 
 
-#define st_HASH_IF_FULL_DO_RESIZE(ht)				\
+#define ST_HASH_IF_FULL_DO_RESIZE(ht)				\
     if ((ht)->nNumOfElements > (ht)->nTableSize) {	\
         st_hash_do_resize(ht);					\
     }
 
 
 static int st_hash_do_resize(HashTable *ht);
-
 
 /*
  * the hash function
@@ -104,6 +103,28 @@ int st_hash_rehash(HashTable *ht)
 
 
 /*
+ * rehash function
+ */
+static int st_hash_do_resize(HashTable *ht)
+{
+    Bucket **t;
+    
+    if ((ht->nTableSize << 1) > 0) {	/* Let's double the table size */
+        t = (Bucket **) realloc(ht->arBuckets, (ht->nTableSize << 1) * sizeof(Bucket *));
+        if (t) {
+            ht->arBuckets = t;
+            ht->nTableSize = (ht->nTableSize << 1);
+            ht->nTableMask = ht->nTableSize - 1;
+            st_hash_rehash(ht);
+            return SUCCESS;
+        }
+        return FAILURE;
+    }
+    return SUCCESS;
+}
+
+
+/*
  * initialization of hash table.
  */
 int _st_hash_init(HashTable *ht, uint nSize, hash_func_t pHashFunction, dtor_func_t pDestructor) {
@@ -129,8 +150,8 @@ int _st_hash_init(HashTable *ht, uint nSize, hash_func_t pHashFunction, dtor_fun
     ht->nNumOfElements = 0;
     ht->nNextFreeElement = 0;
     ht->pInternalPointer = NULL;
-    ht->nApplyCount = 0;
-    ht->bApplyProtection = 1;
+    //ht->nApplyCount = 0;
+    //ht->bApplyProtection = 1;
     
     tmp = (Bucket **) calloc(ht->nTableSize, sizeof(Bucket *));
     
@@ -199,7 +220,7 @@ int _st_hash_add_or_update(HashTable *ht, char *arKey, uint nKeyLength, void *pD
     ht->arBuckets[nIndex] = p;
     
     ht->nNumOfElements++;
-    st_HASH_IF_FULL_DO_RESIZE(ht);		/* If the Hash table is full, resize it */
+    ST_HASH_IF_FULL_DO_RESIZE(ht);		/* If the Hash table is full, resize it */
     return SUCCESS;
 }
 
