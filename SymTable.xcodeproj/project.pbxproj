@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		197CA01F1ADD7A3C00F414C6 /* compile_globals.c in Sources */ = {isa = PBXBuildFile; fileRef = 197CA01D1ADD7A3C00F414C6 /* compile_globals.c */; };
+		197CA0221ADDA5D300F414C6 /* compile.c in Sources */ = {isa = PBXBuildFile; fileRef = 197CA0201ADDA5D300F414C6 /* compile.c */; };
+		19EAC6C71ADE243E00373993 /* tinycpp_lex.c in Sources */ = {isa = PBXBuildFile; fileRef = 19EAC6C41ADE243E00373993 /* tinycpp_lex.c */; };
+		19EAC6C81ADE243E00373993 /* tinycpp_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 19EAC6C51ADE243E00373993 /* tinycpp_parser.c */; };
 		F11A83E01AD592D1005814D9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F11A83DF1AD592D1005814D9 /* main.c */; };
 		F11A83E81AD594BF005814D9 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = F11A83E61AD594BF005814D9 /* hashtable.c */; };
 /* End PBXBuildFile section */
@@ -25,6 +29,16 @@
 
 /* Begin PBXFileReference section */
 		196A70201AD833EE00F39BE9 /* st_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = st_types.h; sourceTree = "<group>"; };
+		197CA0191ADD645B00F414C6 /* lang_elements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang_elements.h; sourceTree = "<group>"; };
+		197CA01D1ADD7A3C00F414C6 /* compile_globals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compile_globals.c; sourceTree = "<group>"; };
+		197CA01E1ADD7A3C00F414C6 /* compile_globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compile_globals.h; sourceTree = "<group>"; };
+		197CA0201ADDA5D300F414C6 /* compile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compile.c; sourceTree = "<group>"; };
+		197CA0211ADDA5D300F414C6 /* compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compile.h; sourceTree = "<group>"; };
+		197CA0231ADDB77900F414C6 /* tinycpp_lex.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = tinycpp_lex.l; sourceTree = "<group>"; };
+		197CA0241ADDB77900F414C6 /* tinycpp_parser.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = tinycpp_parser.y; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		19EAC6C41ADE243E00373993 /* tinycpp_lex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinycpp_lex.c; sourceTree = "<group>"; };
+		19EAC6C51ADE243E00373993 /* tinycpp_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinycpp_parser.c; sourceTree = "<group>"; };
+		19EAC6C61ADE243E00373993 /* tinycpp_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinycpp_parser.h; sourceTree = "<group>"; };
 		F11A83DC1AD592D1005814D9 /* SymTable */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SymTable; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11A83DF1AD592D1005814D9 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		F11A83E61AD594BF005814D9 /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
@@ -61,10 +75,20 @@
 		F11A83DE1AD592D1005814D9 /* SymTable */ = {
 			isa = PBXGroup;
 			children = (
+				19EAC6C41ADE243E00373993 /* tinycpp_lex.c */,
+				19EAC6C51ADE243E00373993 /* tinycpp_parser.c */,
+				19EAC6C61ADE243E00373993 /* tinycpp_parser.h */,
+				197CA0231ADDB77900F414C6 /* tinycpp_lex.l */,
+				197CA0241ADDB77900F414C6 /* tinycpp_parser.y */,
 				F11A83DF1AD592D1005814D9 /* main.c */,
 				F11A83E61AD594BF005814D9 /* hashtable.c */,
 				F11A83E71AD594BF005814D9 /* hashtable.h */,
 				196A70201AD833EE00F39BE9 /* st_types.h */,
+				197CA0191ADD645B00F414C6 /* lang_elements.h */,
+				197CA01D1ADD7A3C00F414C6 /* compile_globals.c */,
+				197CA01E1ADD7A3C00F414C6 /* compile_globals.h */,
+				197CA0201ADDA5D300F414C6 /* compile.c */,
+				197CA0211ADDA5D300F414C6 /* compile.h */,
 			);
 			path = SymTable;
 			sourceTree = "<group>";
@@ -126,7 +150,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11A83E81AD594BF005814D9 /* hashtable.c in Sources */,
+				197CA01F1ADD7A3C00F414C6 /* compile_globals.c in Sources */,
 				F11A83E01AD592D1005814D9 /* main.c in Sources */,
+				197CA0221ADDA5D300F414C6 /* compile.c in Sources */,
+				19EAC6C81ADE243E00373993 /* tinycpp_parser.c in Sources */,
+				19EAC6C71ADE243E00373993 /* tinycpp_lex.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
