@@ -44,30 +44,31 @@
      T_NS = 260,
      T_STD = 261,
      T_INT = 262,
-     T_CLASS = 263,
-     T_PUBLIC = 264,
-     T_RETURN = 265,
-     T_CIN = 266,
-     T_COUT = 267,
-     T_WHILE = 268,
-     T_IF = 269,
-     T_ELSE = 270,
-     T_LEFT_OP = 271,
-     T_RIGHT_OP = 272,
-     T_GE_OP = 273,
-     T_LE_OP = 274,
-     T_EQ_OP = 275,
-     T_NE_OP = 276,
-     T_AND_OP = 277,
-     T_OR_OP = 278,
-     T_OBJ_PT_OPERATOR = 279,
-     T_IDENTIFIER = 280,
-     T_INT_CONSTANT = 281,
-     T_STRING_LITERAL = 282,
-     T_COMMENT = 283,
-     T_WS = 284,
-     UNARY = 285,
-     IFX = 286
+     T_BOOL = 263,
+     T_CLASS = 264,
+     T_PUBLIC = 265,
+     T_RETURN = 266,
+     T_CIN = 267,
+     T_COUT = 268,
+     T_WHILE = 269,
+     T_IF = 270,
+     T_ELSE = 271,
+     T_LEFT_OP = 272,
+     T_RIGHT_OP = 273,
+     T_GE_OP = 274,
+     T_LE_OP = 275,
+     T_EQ_OP = 276,
+     T_NE_OP = 277,
+     T_AND_OP = 278,
+     T_OR_OP = 279,
+     T_OBJ_PT_OPERATOR = 280,
+     T_IDENTIFIER = 281,
+     T_INT_CONSTANT = 282,
+     T_STRING_LITERAL = 283,
+     T_COMMENT = 284,
+     T_WS = 285,
+     UNARY = 286,
+     IFX = 287
    };
 #endif
 /* Tokens.  */
@@ -76,30 +77,31 @@
 #define T_NS 260
 #define T_STD 261
 #define T_INT 262
-#define T_CLASS 263
-#define T_PUBLIC 264
-#define T_RETURN 265
-#define T_CIN 266
-#define T_COUT 267
-#define T_WHILE 268
-#define T_IF 269
-#define T_ELSE 270
-#define T_LEFT_OP 271
-#define T_RIGHT_OP 272
-#define T_GE_OP 273
-#define T_LE_OP 274
-#define T_EQ_OP 275
-#define T_NE_OP 276
-#define T_AND_OP 277
-#define T_OR_OP 278
-#define T_OBJ_PT_OPERATOR 279
-#define T_IDENTIFIER 280
-#define T_INT_CONSTANT 281
-#define T_STRING_LITERAL 282
-#define T_COMMENT 283
-#define T_WS 284
-#define UNARY 285
-#define IFX 286
+#define T_BOOL 263
+#define T_CLASS 264
+#define T_PUBLIC 265
+#define T_RETURN 266
+#define T_CIN 267
+#define T_COUT 268
+#define T_WHILE 269
+#define T_IF 270
+#define T_ELSE 271
+#define T_LEFT_OP 272
+#define T_RIGHT_OP 273
+#define T_GE_OP 274
+#define T_LE_OP 275
+#define T_EQ_OP 276
+#define T_NE_OP 277
+#define T_AND_OP 278
+#define T_OR_OP 279
+#define T_OBJ_PT_OPERATOR 280
+#define T_IDENTIFIER 281
+#define T_INT_CONSTANT 282
+#define T_STRING_LITERAL 283
+#define T_COMMENT 284
+#define T_WS 285
+#define UNARY 286
+#define IFX 287
 
 
 

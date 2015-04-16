@@ -16,11 +16,13 @@
 #define CLASS_ACC_PRIVATE 0x1
 #define CLASS_ACC_PROTETCTED 0x02
 #define CLASS_ACC_PUBLIC 0x04
-#define CLASS_ACC_NONE 0x08
+#define CLASS_ACC_NONE 0
 #define CLASS_ACC_PPP (CLASS_ACC_PRIVATE | CLASS_ACC_PROTETCTED | CLASS_ACC_PUBLIC)
 
 #define TYPE_INT 0x01
-#define TYPE_CLASS 0x02
+#define TYPE_BOOL 0x02
+#define TYPE_CLASS 0x10
+#define BASIC_TYPE_MASK (TYPE_INT | TYPE_BOOL)
 
 //class entry
 typedef struct _class_entry {
@@ -45,6 +47,7 @@ typedef struct _class_entry {
 typedef enum _basic_type {
     BT_UNKNOWN,
     BT_INT,
+    BT_BOOL,
 } basic_type;
 
 #define IS_CLASS_TYPE 0

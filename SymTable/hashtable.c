@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 QiuChusheng. All rights reserved.
 //
 #include "hashtable.h"
+#include "misc.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -460,5 +461,16 @@ int st_hash_num_elements(HashTable *ht)
     return ht->nNumOfElements;
 }
 
+//Hash Key display
+void st_hash_display(HashTable *ht)
+{
+    Bucket *p;
+    
+    p = ht->pListHead;
+    while (p != NULL) {
+        st_output_debug_string("%s <==> 0x%lX\n", p->arKey, p->h);
+        p = p->pListNext;
+    }
+}
 
 

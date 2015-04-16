@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include "compile.h"
 
+//Substitute yylex and Define Semantic Value Type as snode
 #define YYERROR_VERBOSE
 #define YYSTYPE snode
 #define yylex tc_lex
@@ -16,7 +17,7 @@ void yyerror(const char *s, ...);
 
 %token T_H_INC
 %token T_USING T_NS T_STD
-%token T_INT
+%token T_INT T_BOOL
 %token T_CLASS
 %token T_PUBLIC
 %token T_RETURN
@@ -132,13 +133,14 @@ object_identifier: T_IDENTIFIER
 ;
 
 simple_type_name: class_identifier { do_type_class(&$1); $$ = $1; }
-    |	T_INT
+            |	T_INT
+            |   T_BOOL
 ;
 
 type_specifier: simple_type_name
 ;
 
-function_declaration: type_specifier function_identifier { do_begin_function_declaration(&$1, &$2); } argument_declaration_list { do_end_function_declaration(); }
+function_declaration: type_specifier function_identifier { do_begin_function_declaration(&$1, &$2); } argument_declaration_list {/*need `;` to be a complete declaration of function*/}
 ;
 
 argument_declaration_list: '(' ')'
@@ -159,20 +161,20 @@ argument_declaration: simple_type_name object_identifier { do_simple_var_decl(&$
 function_call: function_identifier argument_list
 ;
 
-array_op: '[' T_INT_CONSTANT ']' 
+array_op: '[' T_INT_CONSTANT ']' { do_add_array_dim(&$2); }
 ;
 
 array_ops: array_ops array_op
 		|	/*empty*/
 ;
 
-declarator: type_specifier object_identifier array_ops
+declarator: type_specifier object_identifier { do_simple_var_decl(&$1, &$2, 0); } array_ops { do_end_array_decl(&$2, 0); }
 ;
 
 assignment_stmt: variable '=' expr
 ;
 
-function_definition: function_declaration '{' inner_statement_list '}'
+function_definition: function_declaration '{' inner_statement_list '}' { do_end_function_declaration(); }
 ;
 
 optional_expr:/* empty */	

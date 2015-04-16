@@ -8,6 +8,7 @@
 
 #include "compile.h"
 #include "compile_globals.h"
+#include "misc.h"
 
 int main(int argc, const char * argv[]) {
     
@@ -33,6 +34,9 @@ int main(int argc, const char * argv[]) {
         if (yyparse() == 0) {
             printf("Successfully parsed.\n");
         }
+        
+        dispaly_classes();
+        
         fclose(f);
         
     }

@@ -81,6 +81,7 @@ LABEL [[:alpha:]]([[:alnum:]]|(_[[:alnum:]]))*
 "std" { PRINT_KW(); return T_STD;}
 "class" { PRINT_KW(); return T_CLASS; }
 "int" { PRINT_KW(); return T_INT; }
+"bool" { PRINT_KW(); return T_BOOL;}
 "return" { PRINT_KW(); return T_RETURN; }
 "public" { PRINT_KW(); return T_PUBLIC; }
 "cin" { PRINT_KW(); return T_CIN; }

@@ -84,7 +84,7 @@ void do_begin_function_declaration(snode *return_type, snode *function_name) {
     function_entry fe;
     char *name = function_name->u.constant.value.str.val;
     int name_len = function_name->u.constant.value.str.len;
-    class_entry *ce = NULL;
+    class_entry *ce = NULL, **ce_ptr = NULL;
     int is_method = CG(active_class)? 1: 0;
     HashTable *target_tbl = is_method? &CG(active_class)->function_table: CG(function_table);
     
@@ -96,18 +96,35 @@ void do_begin_function_declaration(snode *return_type, snode *function_name) {
         class_type = return_type->u.constant.value.str.val;
         len = return_type->u.constant.value.str.len;
         
-        if (st_hash_find(CG(class_table), class_type, len, (void **)&ce) == FAILURE) {
-            //unknown class type
+        if (st_hash_find(CG(class_table), class_type, len, (void **)&ce_ptr) == SUCCESS) {
+            ce = *ce_ptr;
         }
         
         fe.return_type.var_type = IS_CLASS_TYPE;
         fe.return_type.type.class_ = ce;
         
-    } else if (return_type->u.EA.type & TYPE_INT){
+    } else {
+        
         fe.return_type.var_type = IS_BASIC_TYPE;
-        fe.return_type.type.bt_ = BT_INT;
+        
+        switch (return_type->u.EA.type & BASIC_TYPE_MASK) {
+            
+            case TYPE_INT:
+                fe.return_type.type.bt_ = BT_INT;
+                break;
+                
+            case TYPE_BOOL:
+                fe.return_type.type.bt_ = BT_BOOL;
+                break;
+                
+            default:
+                fe.return_type.type.bt_ = BT_UNKNOWN;
+                break;
+        }
     }
     
+    
+    fe.fn_flags = CLASS_ACC_NONE;
     if (is_method) {
         fe.fn_flags |= CG(active_acc_flag);
     }
@@ -171,8 +188,17 @@ void do_simple_var_decl(snode *type, snode *var_name, int is_arg) {
             //undeclared class type
         }
         
-    } else if (type->u.EA.type & TYPE_INT){
-        bt = BT_INT;
+    } else {
+        switch (type->u.EA.type & BASIC_TYPE_MASK) {
+                
+            case TYPE_INT:
+                bt = BT_INT;
+                break;
+                
+            case TYPE_BOOL:
+                bt = BT_BOOL;
+                break;
+        }
     }
     
     if (is_arg) {
@@ -248,37 +274,54 @@ void do_end_array_decl(snode *var_name, int is_arg) {
     int i;
     var_type *vt;
     
-    if (is_arg) {
-        arg_info *arg = &CG(active_function)->args_info[CG(active_function)->num_args - 1];
-        vt = &arg->arg_type;
-    } else {
+    //more than 1 dimension, i.e. it is a array
+    if (CG(dim) > 0) {
         
-        if (CG(active_class) && !CG(active_function)) {//class property reached
-            property_info *pp;
-            
-            st_hash_find(&CG(active_class)->properties_info, name, len, (void **)&pp);
-            vt = &pp->type;
-            
+        if (is_arg) {
+            arg_info *arg = &CG(active_function)->args_info[CG(active_function)->num_args - 1];
+            vt = &arg->arg_type;
         } else {
-            variable *var;
             
-            if (CG(active_function)) {//function local variable
-                st_hash_find(CG(active_function)->local_vars, name, len, (void **)&var);
-            } else {//global variable
-                st_hash_find(CG(global_var_table), name, len, (void **)&var);
+            if (CG(active_class) && !CG(active_function)) {//class property reached
+                property_info *pp;
+                
+                st_hash_find(&CG(active_class)->properties_info, name, len, (void **)&pp);
+                vt = &pp->type;
+                
+            } else {
+                variable *var;
+                
+                if (CG(active_function)) {//function local variable
+                    st_hash_find(CG(active_function)->local_vars, name, len, (void **)&var);
+                } else {//global variable
+                    st_hash_find(CG(global_var_table), name, len, (void **)&var);
+                }
+                
+                vt = &var->variable_type;
             }
-            
-            vt = &var->variable_type;
         }
+        
+        //set the types for array element
+        switch(vt->var_type) {
+            case IS_BASIC_TYPE:
+                vt->type.array_t_.bt_ = vt->type.bt_;
+                vt->type.array_t_.class_ = NULL;
+                break;
+                
+            case IS_CLASS_TYPE:
+                vt->type.array_t_.class_ = vt->type.class_;
+                vt->type.array_t_.bt_ = BT_UNKNOWN;
+                break;
+        }
+        
+        vt->var_type = IS_ARRAY_TYPE;
+        vt->type.array_t_.dim = CG(dim);
+        for (i = 0; i < CG(dim); i++) {
+            vt->type.array_t_.dimensions[i] = CG(dimensions)[i];
+        }
+        
+        CG(dim) = 0;
     }
-    
-    vt->var_type = IS_ARRAY_TYPE;
-    vt->type.array_t_.dim = CG(dim);
-    for (i = 0; i < CG(dim); i++) {
-        vt->type.array_t_.dimensions[i] = CG(dimensions)[i];
-    }
-    
-    CG(dim) = 0;
 }
 
 
@@ -305,7 +348,11 @@ again:
         case T_INT:
             snode_->u.EA.type = TYPE_INT;
             break;
-
+        
+        case T_BOOL:
+            snode_->u.EA.type = TYPE_BOOL;
+            break;
+            
         case T_EOF:
             return T_EOF;
     }

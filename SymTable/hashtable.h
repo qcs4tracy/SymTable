@@ -160,4 +160,6 @@ static inline int st_symtable_exists(HashTable *ht, char *arKey, uint nKeyLength
     return st_hash_exists(ht, arKey, nKeyLength);
 }
 
+void st_hash_display(HashTable *ht);
+
 #endif /* defined(__SymTable__hashtable__) */

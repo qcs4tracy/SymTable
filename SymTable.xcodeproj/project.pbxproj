@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		197CA01F1ADD7A3C00F414C6 /* compile_globals.c in Sources */ = {isa = PBXBuildFile; fileRef = 197CA01D1ADD7A3C00F414C6 /* compile_globals.c */; };
 		197CA0221ADDA5D300F414C6 /* compile.c in Sources */ = {isa = PBXBuildFile; fileRef = 197CA0201ADDA5D300F414C6 /* compile.c */; };
+		19C420A71ADF0E9C0088985C /* misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 19C420A51ADF0E9C0088985C /* misc.c */; };
 		19EAC6C71ADE243E00373993 /* tinycpp_lex.c in Sources */ = {isa = PBXBuildFile; fileRef = 19EAC6C41ADE243E00373993 /* tinycpp_lex.c */; };
 		19EAC6C81ADE243E00373993 /* tinycpp_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 19EAC6C51ADE243E00373993 /* tinycpp_parser.c */; };
 		F11A83E01AD592D1005814D9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F11A83DF1AD592D1005814D9 /* main.c */; };
@@ -36,6 +37,8 @@
 		197CA0211ADDA5D300F414C6 /* compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compile.h; sourceTree = "<group>"; };
 		197CA0231ADDB77900F414C6 /* tinycpp_lex.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = tinycpp_lex.l; sourceTree = "<group>"; };
 		197CA0241ADDB77900F414C6 /* tinycpp_parser.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = tinycpp_parser.y; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		19C420A51ADF0E9C0088985C /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = misc.c; sourceTree = "<group>"; };
+		19C420A61ADF0E9C0088985C /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
 		19EAC6C41ADE243E00373993 /* tinycpp_lex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinycpp_lex.c; sourceTree = "<group>"; };
 		19EAC6C51ADE243E00373993 /* tinycpp_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tinycpp_parser.c; sourceTree = "<group>"; };
 		19EAC6C61ADE243E00373993 /* tinycpp_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinycpp_parser.h; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 				197CA01E1ADD7A3C00F414C6 /* compile_globals.h */,
 				197CA0201ADDA5D300F414C6 /* compile.c */,
 				197CA0211ADDA5D300F414C6 /* compile.h */,
+				19C420A51ADF0E9C0088985C /* misc.c */,
+				19C420A61ADF0E9C0088985C /* misc.h */,
 			);
 			path = SymTable;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C420A71ADF0E9C0088985C /* misc.c in Sources */,
 				F11A83E81AD594BF005814D9 /* hashtable.c in Sources */,
 				197CA01F1ADD7A3C00F414C6 /* compile_globals.c in Sources */,
 				F11A83E01AD592D1005814D9 /* main.c in Sources */,
