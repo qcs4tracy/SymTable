@@ -46,7 +46,7 @@ void do_begin_class_declaration(snode *class_name) {
     new_ce->name_length = len;
     
     //enter the class scope, default is private scope before `public` keyword is seen
-    if (CG(active_acc_flag) & CLASS_ACC_NONE) {
+    if (CG(active_acc_flag) == CLASS_ACC_NONE) {
         CG(active_acc_flag) = CLASS_ACC_PRIVATE;
     }
     
@@ -229,7 +229,8 @@ void do_simple_var_decl(snode *type, snode *var_name, int is_arg) {
             pp.name = var_name->u.constant.value.str.val;
             pp.name_len = var_name->u.constant.value.str.len;
             pp.h = st_get_hash_value(pp.name, pp.name_len);
-            pp.flags |= CG(active_acc_flag);
+            pp.flags = 0;
+            pp.flags|= CG(active_acc_flag);
             pp.ce = CG(active_class);
             if (is_class_type) {
                 pp.type.var_type = IS_CLASS_TYPE;

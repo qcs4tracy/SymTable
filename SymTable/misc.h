@@ -11,5 +11,7 @@
 
 void st_output_debug_string(char *format, ...);
 void dispaly_classes();
+void display_nonclass_funcs();
+void display_globals();
 
 #endif /* defined(__SymTable__misc__) */

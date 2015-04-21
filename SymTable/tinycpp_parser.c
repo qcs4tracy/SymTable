@@ -1593,7 +1593,7 @@ yyreduce:
     {
         case 2:
 #line 47 "tinycpp_parser.y"
-    { printf("yes\n"); ;}
+    { ;}
     break;
 
   case 54:

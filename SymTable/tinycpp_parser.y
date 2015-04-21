@@ -44,7 +44,7 @@ void yyerror(const char *s, ...);
 
 %%
 
-program: T_H_INC T_USING T_NS T_STD ';' external_definition_list { printf("yes\n"); }
+program: T_H_INC T_USING T_NS T_STD ';' external_definition_list { }
 ;
 
 external_definition_list: external_definition

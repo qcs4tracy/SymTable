@@ -94,25 +94,59 @@ char *acc_type_str(uint acc_flag) {
 }
 
 
+void display_properties(HashTable *pps) {
+    
+    Bucket *p;
+    property_info *prop;
+    
+    p = pps->pListHead;
+    st_output_debug_string("  Properties:\n");
+    while (p != NULL) {
+        prop = p->pData;
+        st_output_debug_string("\t%s %s: %s;\n", acc_type_str(prop->flags), prop->name, type_str(&prop->type));
+        p = p->pListNext;
+    }
+    
+}
+
+
 void dispaly_classes() {
 
     HashTable *class_tbl = CG(class_table);
     class_entry *ce = NULL;
     Bucket *p;
     
+    st_output_debug_string("Classes:\n\n");
     p = class_tbl->pListHead;
     while (p != NULL) {
         ce = p->pDataPtr;
         st_output_debug_string("class %s {\n", ce->name);
-        
+        st_output_debug_string("  Methods:\n");
         display_functions(&ce->function_table);
-        
-        /*function & property output*/
-        
-        st_output_debug_string("}");
+        display_properties(&ce->properties_info);
+        st_output_debug_string("}\n\n");
         p = p->pListNext;
     }
 
+}
+
+
+void display_variables(HashTable *vars) {
+
+    Bucket *p;
+    variable *var;
+    
+    p = vars->pListHead;
+    while (p != NULL) {
+        var = p->pData;
+        p = p->pListNext;
+        if (!p) {
+            st_output_debug_string("%s: %s;", var->name, type_str(&var->variable_type));
+            break;
+        }
+        st_output_debug_string("%s : %s, ", var->name, type_str(&var->variable_type));
+    }
+    
 }
 
 
@@ -137,28 +171,43 @@ void display_functions (HashTable *func_tbl) {
             st_output_debug_string("%s : %s, ", fe->args_info[i].name, type_str(&fe->args_info[i].arg_type));
         }
         
-        /*TODO: local variables*/
-        
-        st_output_debug_string(");\n");
-        
+        st_output_debug_string(")");
+        st_output_debug_string(" { ");
+        display_variables(fe->local_vars);
+        st_output_debug_string(" }\n\n");
         p = p->pListNext;
     }
-    
+        
 }
 
 
-void display_variables(HashTable *var_tbl, char *banner) {
+void display_globals() {
     
+    HashTable *glb_tbl = CG(global_var_table);
+    variable *var;
+    Bucket *p;
     
+    p = glb_tbl->pListHead;
+    
+    st_output_debug_string("Global Variables:\n\n");
+    while (p != NULL) {
+        var = p->pData;
+        st_output_debug_string("%s: %s;\n", var->name, type_str(&var->variable_type));
+    }
+    
+    st_output_debug_string("\n\n");
 
 }
 
+void display_nonclass_funcs() {
 
-
-
-
-
-
+    HashTable *func_tbl = CG(function_table);
+    
+    st_output_debug_string("Functions:\n\n");
+    display_functions(func_tbl);
+    st_output_debug_string("\n\n");
+    
+}
 
 
 

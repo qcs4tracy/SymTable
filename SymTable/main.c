@@ -32,10 +32,13 @@ int main(int argc, const char * argv[]) {
         yyrestart(f);
         
         if (yyparse() == 0) {
-            printf("Successfully parsed.\n");
+            /*parsing succeed*/;
         }
         
         dispaly_classes();
+        display_globals();
+        display_nonclass_funcs();
+        
         
         fclose(f);
         
